@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weather App</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://plus.unsplash.com/premium_photo-1673603988651-99f79e4ae7d3?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8d2VhdGhlciUyMGFwcHxlbnwwfHwwfHx8MA%3D%3D') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      backdrop-filter: brightness(0.9);
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+
+    input {
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      width: 200px;
+      margin-right: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #2ecc71;
+      border: none;
+      border-radius: 5px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #27ae60;
+    }
+
+    #result {
+      margin-top: 30px;
+      font-size: 24px;
+      font-weight: bold;
+      background-color: rgba(0, 0, 0, 0.4);
+      padding: 10px 20px;
+      border-radius: 10px;
+    }
+
+    .input-section {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🌤️ Check Today's Weather</h1>
+
+  <div class="input-section">
+    <input type="text" id="locationInput" placeholder="Enter city name..." />
+    <button onclick="getWeather()">Get Weather</button>
+  </div>
+
+  <div id="result"></div>
+
+  <script>
+    async function getWeather() {
+      const location = document.getElementById("locationInput").value;
+      const apiKey = "ccf2cb579ee04b9689153155250606";
+      const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=yes`;
+
+      try {
+        const response = await fetch(url);
+        if (!response.ok) {
+          throw new Error("Location not found");
+        }
+
+        const data = await response.json();
+        const tempC = data.current.temp_c;
+        const cityName = data.location.name;
+        const country = data.location.country;
+        const condition = data.current.condition.text;
+
+        document.getElementById("result").innerText = 
+          `🌡️ ${cityName}, ${country}\nTemperature: ${tempC}°C\nCondition: ${condition}`;
+      } catch (error) {
+        document.getElementById("result").innerText = `❌ Error: ${error.message}`;
+      }
+    }
+  </script>
+</body>
+</html>
