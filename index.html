@@ -57,6 +57,8 @@
       background-color: rgba(0, 0, 0, 0.4);
       padding: 10px 20px;
       border-radius: 10px;
+      white-space: pre-line;
+      text-align: center;
     }
 
     .input-section {
@@ -68,6 +70,7 @@
   <h1>🌤️ Check Today's Weather</h1>
 
   <div class="input-section">
+    <label for="locationInput" style="display: none;">City Name</label>
     <input type="text" id="locationInput" placeholder="Enter city name..." />
     <button onclick="getWeather()">Get Weather</button>
   </div>
@@ -76,9 +79,16 @@
 
   <script>
     async function getWeather() {
-      const location = document.getElementById("locationInput").value;
+      const location = document.getElementById("locationInput").value.trim();
+      if (!location) {
+        document.getElementById("result").innerText = "⚠️ Please enter a city name.";
+        return;
+      }
+
       const apiKey = "ccf2cb579ee04b9689153155250606";
-      const url = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=yes`;
+      const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=yes`;
+
+      document.getElementById("result").innerText = "⏳ Loading...";
 
       try {
         const response = await fetch(url);
