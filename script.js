@@ -31,14 +31,15 @@ async function getWeather() {
     const dateTime = data.location.localtime;
 
     document.getElementById("result").innerHTML = `
-      <img src="https:${icon}" alt="Weather Icon" width="80"><br>
-      📍 ${cityName}, ${country}<br>
-      🕒 Date & Time: ${dateTime}<br>
-      🌡️ Temperature: ${tempC}°C<br>
-      💧 Humidity: ${humidity}%<br>
-      💨 Wind Speed: ${windSpeed} km/h<br>
-      🌥️ Condition: ${condition}
-    `;
+    <img src="https:${icon}" alt="Weather Icon">
+    <h2>${cityName}, ${country}</h2>
+    <p>🕒 ${dateTime}</p>
+    <p>🌡️ Temperature: ${tempC}°C</p>
+    <p>💧 Humidity: ${humidity}%</p>
+    <p>💨 Wind Speed: ${windSpeed} km/h</p>
+    <p>🌥️ Condition: ${condition}</p>
+  `;
+    
 
   } catch (error) {
     document.getElementById("result").innerText =
