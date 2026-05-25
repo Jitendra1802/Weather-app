@@ -77,37 +77,6 @@
 
   <div id="result"></div>
 
-  <script>
-    async function getWeather() {
-      const location = document.getElementById("locationInput").value.trim();
-      if (!location) {
-        document.getElementById("result").innerText = "⚠️ Please enter a city name.";
-        return;
-      }
-
-      const apiKey = "ccf2cb579ee04b9689153155250606";
-      const url = `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}&aqi=yes`;
-
-      document.getElementById("result").innerText = "⏳ Loading...";
-
-      try {
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error("Location not found");
-        }
-
-        const data = await response.json();
-        const tempC = data.current.temp_c;
-        const cityName = data.location.name;
-        const country = data.location.country;
-        const condition = data.current.condition.text;
-
-        document.getElementById("result").innerText = 
-          `🌡️ ${cityName}, ${country}\nTemperature: ${tempC}°C\nCondition: ${condition}`;
-      } catch (error) {
-        document.getElementById("result").innerText = `❌ Error: ${error.message}`;
-      }
-    }
-  </script>
+<script src="script.js"></script>
 </body>
 </html>
