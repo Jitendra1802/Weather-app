@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weather App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>🌤️ Check Today's Weather</h1>
+
+  <div class="input-section">
+    <label for="locationInput" style="display: none;">City Name</label>
+    <input 
+      type="text" 
+      id="locationInput" 
+      placeholder="Enter city name..." 
+      onkeydown="if(event.key === 'Enter') getWeather()"
+    />
+    <button onclick="getWeather()">Get Weather</button>
+  </div>
+
+  <div id="result"></div>
+  <div id="forecast"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
